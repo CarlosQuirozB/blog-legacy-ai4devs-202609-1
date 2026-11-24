@@ -115,7 +115,8 @@ test.group('POST /posts/:slug/comentarios', (group) => {
     // Assert
     respuesta.assertStatus(201)
     assert.strictEqual(respuesta.body().comentario.padre_id, 424242)
-    assert.strictEqual((await filaComentario(respuesta.body().comentario.id)).padre_id, 424242)
+    const guardado = await filaComentario(respuesta.body().comentario.id)
+    assert.strictEqual(guardado.padre_id, 424242)
   })
 
   test('BUG: no valida el tipo: un nombre numérico se guarda como el texto "123.0"', async ({

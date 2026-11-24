@@ -65,7 +65,8 @@ test.group('PATCH /comentarios/:id', (group) => {
     // Assert
     respuesta.assertStatus(200)
     assert.strictEqual(respuesta.body().comentario.cuerpo, 'a')
-    assert.strictEqual((await filaComentario(9101)).cuerpo, 'a')
+    const guardado = await filaComentario(9101)
+    assert.strictEqual(guardado.cuerpo, 'a')
   })
 
   test('sin cuerpo responde 400 {error} y no cambia nada', async ({ client, assert }) => {
